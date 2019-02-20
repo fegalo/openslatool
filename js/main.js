@@ -1,9 +1,55 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
-    main();
+  console.log( "ready!" );
+  main();
 });
 
-
 function main() {
+  sample_dates();
+  create_list();
+  calc_total_time();
+}
+//vars
+var list = [];
+var total_time = 0;
 
+function sample_dates(){
+  var dateB = moment('2014-01-12 01:00');
+  var dateC = moment('2014-01-11 00:00');
+
+  console.log('Difference is ', dateB.diff(dateC), 'milliseconds');
+  console.log('Difference is ', dateB.diff(dateC, 'days'), 'days');
+  console.log('Difference is ', dateB.diff(dateC, 'months'), 'months');
+  console.log('Difference is ', dateB.diff(dateC, 'minutes'), 'minutes');
+}
+
+function extract_time(inc){
+  var start = moment(inc.start);
+  var end = moment(inc.end);
+  return end.diff(start, 'minutes')
+}
+
+function create_list(){
+  var inc1 = {
+    id: 'INC1',
+    start: '2019-01-15 01:00',
+    end: '2019-01-15 02:00',
+    tag: ["back", "middle", "front"],
+    desc: 'Incidence 1'
+  };
+  var inc2 = {
+    id: 'INC2',
+    start: '2019-01-15 03:00',
+    end: '2019-01-15 05:00',
+    tag: ["back"],
+    desc: 'Incidence 2'
+  };
+  list=[inc1,inc2];
+}
+
+function calc_total_time(){
+  total_time=0;
+  list.forEach(function(e) {
+    total_time+=extract_time(e)
+  });
+  console.log(total_time);
 }
