@@ -7,6 +7,7 @@ function main() {
   sample_dates();
   create_list();
   calc_total_time();
+  calc_availability();
 }
 //vars
 var list = [];
@@ -33,23 +34,33 @@ function create_list(){
     id: 'INC1',
     start: '2019-01-15 01:00',
     end: '2019-01-15 02:00',
-    tag: ["back", "middle", "front"],
+    tags: ["back", "middle", "front"],
     desc: 'Incidence 1'
   };
   var inc2 = {
     id: 'INC2',
     start: '2019-01-15 03:00',
     end: '2019-01-15 05:00',
-    tag: ["back"],
+    tags: ["back"],
     desc: 'Incidence 2'
   };
   list=[inc1,inc2];
 }
-
+function calc_total_month(){
+  var start = moment('2019-01-01 01:00');
+  var end   = moment('2019-02-01 01:00');
+  var month = end.diff(start, 'minutes')
+  console.log('Month '+month);
+  return month;
+}
 function calc_total_time(){
   total_time=0;
   list.forEach(function(e) {
     total_time+=extract_time(e)
   });
-  console.log(total_time);
+  console.log('TOTAL '+total_time);
+  return total_time;
+}
+function calc_availability(){
+  console.log(1-calc_total_time()/calc_total_month());
 }
