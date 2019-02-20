@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
 
-    <title>Hello, world!</title>
+    <title>Open SLA Tool</title>
   </head>
   <body>
     <!-- Optional JavaScript -->
@@ -19,7 +19,7 @@
     <script src="js/main.js" ></script>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">SLA</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,57 +33,61 @@
 
     <div class="collapse" id="listDiv">
       <div class="card card-body">
+        <h2>Incidents</h2>
         <table class="table" id="listTable">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">id</th>
-              <th scope="col">start</th>
-              <th scope="col">end</th>
-              <th scope="col">tags</th>
-              <th scope="col">desc</th>
+              <th scope="col">ID</th>
+              <th scope="col">Start time</th>
+              <th scope="col">End time</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Description</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
           </tbody>
         </table>
+          <button id="loadButton" class="btn btn-primary">Load</button>
       </div>
     </div>
 
     <div class="collapse" id="reportDiv">
       <div class="card card-body">
+        <h2>Availability</h2>
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="year">Year</label>
+            <input type="text" class="form-control" id="year" placeholder="2019" >
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="month">Month</label>
+            <input type="text" class="form-control" id="month" placeholder="1" >
           </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <div class="form-group">
+            <label for="year">Tag</label>
+            <input type="text" class="form-control" id="tag" placeholder="back" >
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button id="calcButton" type="submit" class="btn btn-primary">Calculate</button>
+          <hr class="col-xs-12">
+          <div class="form-group">
+            <label for="incNumber">Number of incidents</label>
+            <input type="text" class="form-control" id="incNumber" placeholder="0 incidents" readonly>
+          </div>
+          <div class="form-group">
+            <label for="totTime">Total time</label>
+            <input type="text" class="form-control" id="totTime" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totTimeHelp" class="form-text text-muted">The sum of all incidents</small>
+          </div>
+          <div class="form-group">
+            <label for="maxTime">Maximum time</label>
+            <input type="text" class="form-control" id="maxTime" aria-describedby="maxTimeHelp" placeholder="0 minutes" readonly>
+            <small id="maxTimeHelp" class="form-text text-muted">Maximu m time</small>
+          </div>
+          <div class="form-group">
+            <label for="avail">Availability</label>
+            <input type="text" class="form-control" id="avail" aria-describedby="avaHelp" placeholder="%" readonly>
+            <small id="avaHelp" class="form-text text-muted">(24x7)</small>
+          </div>
         </form>
       </div>
     </div>
