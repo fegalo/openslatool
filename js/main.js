@@ -64,3 +64,17 @@ function calc_total_time(){
 function calc_availability(){
   console.log(1-calc_total_time()/calc_total_month());
 }
+function fill_table(){
+  $('#listTable tbody tr').remove();
+  $.each(list, function(i, item) {
+    var $tr = $('<tr>').append(
+        $('<th>').text(item.id),
+        $('<td>').text(item.start),
+        $('<td>').text(item.end),
+        $('<td>').text(item.tags),
+        $('<td>').text(item.desc)
+    ); //.appendTo('#records_table');
+    $tr.appendTo('#listTable tbody');
+    //console.log($tr.wrap('<p>').html());
+});
+}
