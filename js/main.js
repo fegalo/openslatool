@@ -1,7 +1,20 @@
 $( document ).ready(function() {
   console.log( "ready!" );
   main();
+  load_events();
 });
+
+function load_events() {
+  $('#loadButton').on('click',function() {
+   fill_table();
+  });
+  $('#calcButton').on('click',function() {
+   fill_ava();
+  });
+  $('#inputFile').on('change',function(e) {
+   handleFileSelect(e);
+  });
+}
 
 function main() {
   sample_dates();
@@ -12,6 +25,8 @@ function main() {
 //vars
 var list = [];
 var total_time = 0;
+var incNumber = 0;
+var totalTime=0;
 
 function sample_dates(){
   var dateB = moment('2014-01-12 01:00');
@@ -46,24 +61,6 @@ function create_list(){
   };
   list=[inc1,inc2];
 }
-function calc_total_month(){
-  var start = moment('2019-01-01 01:00');
-  var end   = moment('2019-02-01 01:00');
-  var month = end.diff(start, 'minutes')
-  console.log('Month '+month);
-  return month;
-}
-function calc_total_time(){
-  total_time=0;
-  list.forEach(function(e) {
-    total_time+=extract_time(e)
-  });
-  console.log('TOTAL '+total_time);
-  return total_time;
-}
-function calc_availability(){
-  console.log(1-calc_total_time()/calc_total_month());
-}
 function fill_table(){
   $('#listTable tbody tr').remove();
   $.each(list, function(i, item) {
@@ -77,4 +74,88 @@ function fill_table(){
     $tr.appendTo('#listTable tbody');
     //console.log($tr.wrap('<p>').html());
 });
+}
+
+function fill_ava(){
+var total_month = calc_total_month();
+var total_time= calc_total_time();
+var ava= 1-total_time/total_month;
+ava=Math.round(ava * 100 * 100) / 100
+$('#totTime').val(total_time);
+$('#maxTime').val(0);
+$('#avail').val(ava + '%');
+
+}
+function calc_total_month(){
+  var year=$('#year').val()==null? $('#year').val() : $('#year').attr('placeholder');
+  var month=$('#month').val()==null? $('#month').val() : $('#month').attr('placeholder');
+  var start = moment(year+'-'+month+'-01 01:00');
+  var end   = moment(year+'-'+(month+1)+'-01 01:00');
+  var tmonth = end.diff(start, 'minutes')
+  console.log('calc_total_month '+tmonth);
+  return tmonth;
+}
+/*function calc_total_time(){
+  total_time=0;
+  var tag=
+  list.forEach(function(e) {
+    total_time+=extract_time(e)
+  });
+  console.log('TOTAL '+total_time);
+  return total_time;
+}*/
+/*
+function calc_total_month(){
+  var start = moment('2019-01-01 01:00');
+  var end   = moment('2019-02-01 01:00');
+  var month = end.diff(start, 'minutes')
+  console.log('Month '+month);
+  return month;
+}*/
+function calc_total_time(){
+  total_time=0;
+  var tag ;
+  if($('#tag').val()==null || $('#tag').val()=='' ){
+    tag=$('#tag').attr('placeholder');
+  }else{
+    tag=$('#tag').val()
+  }
+  console.log('calc_total_time '+tag);
+  list.forEach(function(e) {
+    if($.inArray(tag,e.tags) != -1){
+      total_time+=extract_time(e)
+    }
+  });
+  console.log('calc_total_time '+total_time);
+  return total_time;
+}
+function calc_availability(){
+  console.log(1-calc_total_time()/calc_total_month());
+  return 1-calc_total_time()/calc_total_month();
+}
+
+
+function handleFileSelect(evt) {
+  var files = evt.target.files; // FileList object
+  // files is a FileList of File objects. List some properties.
+  var output = [];
+  for (var i = 0, f; f = files[i]; i++) {
+    console.log('handleFileSelect '+f.name);
+    console.log('handleFileSelect '+f.type);
+    console.log('handleFileSelect '+f.size);
+    console.log('handleFileSelect '+f.name);
+    var reader = new FileReader();
+     // Closure to capture the file information.
+     reader.onload = (function(theFile) {
+       return function(e) {
+         console.log(e.target.result);
+         list=JSON.parse(e.target.result);
+         fill_table();
+       };
+     })(f);
+     // Read in the image file as a data URL.
+     reader.readAsText(f);
+  }
+
+
 }

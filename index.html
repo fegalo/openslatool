@@ -48,13 +48,15 @@
           </tbody>
         </table>
           <button id="loadButton" class="btn btn-primary">Load</button>
+            <div class="form-group">
+              <input type="file" class="form-control-file" id="inputFile">
+            </div>
       </div>
     </div>
 
     <div class="collapse" id="reportDiv">
       <div class="card card-body">
         <h2>Availability</h2>
-        <form>
           <div class="form-group">
             <label for="year">Year</label>
             <input type="text" class="form-control" id="year" placeholder="2019" >
@@ -67,7 +69,7 @@
             <label for="year">Tag</label>
             <input type="text" class="form-control" id="tag" placeholder="back" >
           </div>
-          <button id="calcButton" type="submit" class="btn btn-primary">Calculate</button>
+          <button id="calcButton" class="btn btn-primary">Calculate</button>
           <hr class="col-xs-12">
           <div class="form-group">
             <label for="incNumber">Number of incidents</label>
@@ -88,7 +90,6 @@
             <input type="text" class="form-control" id="avail" aria-describedby="avaHelp" placeholder="%" readonly>
             <small id="avaHelp" class="form-text text-muted">(24x7)</small>
           </div>
-        </form>
       </div>
     </div>
 
