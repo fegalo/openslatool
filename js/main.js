@@ -27,6 +27,8 @@ var list = [];
 var total_time = 0;
 var incNumber = 0;
 var totalTime=0;
+var total_inc=0;
+var max_inc=0;
 
 function sample_dates(){
   var dateB = moment('2014-01-12 01:00');
@@ -82,8 +84,10 @@ var total_time= calc_total_time();
 var ava= 1-total_time/total_month;
 ava=Math.round(ava * 100 * 100) / 100
 $('#totTime').val(total_time);
-$('#maxTime').val(0);
+$('#maxTime').val(max_inc);
+$('#incNumber').val(total_inc);
 $('#avail').val(ava + '%');
+
 
 }
 function calc_total_month(){
@@ -120,10 +124,17 @@ function calc_total_time(){
   }else{
     tag=$('#tag').val()
   }
+  total_inc=0;
+  max_inc=0;
   console.log('calc_total_time '+tag);
   list.forEach(function(e) {
     if($.inArray(tag,e.tags) != -1){
-      total_time+=extract_time(e)
+      var duration_time=extract_time(e);
+      total_time+=duration_time;
+      total_inc++;
+      if(duration_time>max_inc){
+        max_inc=duration_time;
+      }
     }
   });
   console.log('calc_total_time '+total_time);
