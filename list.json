@@ -8,7 +8,7 @@
    "middle",
    "front"
   ],
-  "desc": "Incidence 1"
+  "desc": "Incident 1"
  },
  {
   "id": "INC2",
@@ -17,7 +17,7 @@
   "tags": [
    "back"
   ],
-  "desc": "Incidence 2"
+  "desc": "Incident 2"
 },
  {
   "id": "INC3",
@@ -26,6 +26,6 @@
   "tags": [
    "back"
   ],
-  "desc": "Incidence 3"
+  "desc": "Incident 3"
  }
 ]
