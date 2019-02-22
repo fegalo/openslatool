@@ -4,18 +4,16 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" >
-
     <title>Open SLA Tool</title>
   </head>
   <body>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- JS -->
     <script src="js/jquery.min.js" ></script>
     <script src="js/bootstrap.bundle.min.js" ></script>
     <script src="js/moment.min.js" ></script>
+    <script src="js/sla.js" ></script>
     <script src="js/main.js" ></script>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,16 +23,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" data-toggle="collapse" href="#listDiv" role="button" aria-expanded="false" aria-controls="listDiv">Incidents <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" data-toggle="collapse" href="#reportDiv" role="button" aria-expanded="false" aria-controls="reportDiv">Availability</a>
+          <a class="nav-item nav-link active" data-toggle="collapse" href="#incidentListDiv" role="button" aria-expanded="false" aria-controls="listDiv">Incidents <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" data-toggle="collapse" href="#availabilityDiv" role="button" aria-expanded="false" aria-controls="reportDiv">Availability</a>
         </div>
       </div>
     </nav>
 
-    <div class="collapse" id="listDiv">
+    <div class="collapse show" id="incidentListDiv">
       <div class="card card-body">
         <h2>Incidents</h2>
-        <table class="table" id="listTable">
+        <table class="table" id="incidentListTable">
           <thead class="thead-dark">
             <tr>
               <th scope="col">ID</th>
@@ -47,48 +45,48 @@
           <tbody>
           </tbody>
         </table>
-          <button id="loadButton" class="btn btn-primary">Load</button>
+          <button id="loadIncidentListButton" class="btn btn-primary">Load Default List</button>
             <div class="form-group">
-              <input type="file" class="form-control-file" id="inputFile">
+              <input type="file" class="form-control-file" id="inputIncidentListFile">
             </div>
       </div>
     </div>
 
-    <div class="collapse" id="reportDiv">
+    <div class="collapse show" id="availabilityDiv">
       <div class="card card-body">
         <h2>Availability</h2>
-          <div class="form-group">
-            <label for="year">Year</label>
-            <input type="text" class="form-control" id="year" placeholder="2019" >
+          <div class="form-group row">
+            <label for="year" class="col-form-label col-sm-2">Year</label>
+            <input type="text" class="form-control col-sm-2" id="year" placeholder="2019" >
           </div>
-          <div class="form-group">
-            <label for="month">Month</label>
-            <input type="text" class="form-control" id="month" placeholder="1" >
+          <div class="form-group row">
+            <label for="month" class="col-form-label col-sm-2">Month</label>
+            <input type="text" class="form-control col-sm-2" id="month" placeholder="1" >
           </div>
-          <div class="form-group">
-            <label for="year">Tag</label>
-            <input type="text" class="form-control" id="tag" placeholder="back" >
+          <div class="form-group row">
+            <label for="year" class="col-form-label col-sm-2">Tag</label>
+            <input type="text" class="form-control col-sm-2" id="tag" placeholder="back" >
           </div>
           <button id="calcButton" class="btn btn-primary">Calculate</button>
           <hr class="col-xs-12">
-          <div class="form-group">
-            <label for="incNumber">Number of incidents</label>
-            <input type="text" class="form-control" id="incNumber" placeholder="0 incidents" readonly>
+          <div class="form-group row">
+            <label for="incNumber" class="col-form-label col-sm-2">Number of incidents</label>
+            <input type="text" class="form-control col-sm-2" id="numInc" placeholder="0 incidents" readonly>
           </div>
-          <div class="form-group">
-            <label for="totTime">Total time</label>
-            <input type="text" class="form-control" id="totTime" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
-            <small id="totTimeHelp" class="form-text text-muted">The sum of all incidents</small>
+          <div class="form-group row">
+            <label for="totTime" class="col-form-label col-sm-2">Total downtime</label>
+            <input type="text" class="form-control col-sm-2" id="totDTime" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totTimeHelp" class="form-text text-muted col-sm-2">The sum of all incidents</small>
           </div>
-          <div class="form-group">
-            <label for="maxTime">Maximum time</label>
-            <input type="text" class="form-control" id="maxTime" aria-describedby="maxTimeHelp" placeholder="0 minutes" readonly>
-            <small id="maxTimeHelp" class="form-text text-muted">Maximu m time</small>
+          <div class="form-group row">
+            <label for="maxTime" class="col-form-label col-sm-2">Maximum downtime</label>
+            <input type="text" class="form-control col-sm-2" id="maxDTime" aria-describedby="maxTimeHelp" placeholder="0 minutes" readonly>
+            <small id="maxTimeHelp" class="form-text text-muted col-sm-2">Maximum time</small>
           </div>
-          <div class="form-group">
-            <label for="avail">Availability</label>
-            <input type="text" class="form-control" id="avail" aria-describedby="avaHelp" placeholder="%" readonly>
-            <small id="avaHelp" class="form-text text-muted">(24x7)</small>
+          <div class="form-group row">
+            <label for="avail" class="col-form-label col-sm-2">Availability</label>
+            <input type="text" class="form-control col-sm-2" id="avail" aria-describedby="avaHelp" placeholder="%" readonly>
+            <small id="avaHelp" class="form-text text-muted col-sm-2">(24x7)</small>
           </div>
       </div>
     </div>
