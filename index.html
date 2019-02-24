@@ -13,6 +13,8 @@
     <script src="js/jquery.min.js" ></script>
     <script src="js/bootstrap.bundle.min.js" ></script>
     <script src="js/moment.min.js" ></script>
+    <script src="js/Chart.min.js" ></script>
+
     <script src="js/sla.js" ></script>
     <script src="js/main.js" ></script>
 
@@ -25,6 +27,7 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link active" data-toggle="collapse" href="#incidentListDiv" role="button" aria-expanded="false" aria-controls="listDiv">Incidents <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" data-toggle="collapse" href="#availabilityDiv" role="button" aria-expanded="false" aria-controls="reportDiv">Availability</a>
+          <a class="nav-item nav-link" data-toggle="collapse" href="#chartsDiv" role="button" aria-expanded="false" aria-controls="chartsDiv">Charts</a>
         </div>
       </div>
     </nav>
@@ -90,6 +93,11 @@
           </div>
       </div>
     </div>
-
+    <div class="collapse" id="chartsDiv">
+      <div class="card card-body">
+      <h2>Charts</h2>
+      <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+    </div>
   </body>
 </html>
