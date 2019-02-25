@@ -59,7 +59,7 @@ function fill_table(list){
         $('<td>').text(item.start),
         $('<td>').text(item.end),
         $('<td>').text(item.tags),
-        $('<td>').text(item.desc)
+        $('<td>').text(item.desc).addClass("d-none d-sm-table-cell")
     );
     $tr.appendTo('#incidentListTable tbody');
   });
@@ -69,9 +69,8 @@ function fill_ava(list){
   var year=getValue('#year');
   var month=getValue('#month');
   var tag=getValue('#tag');
-  
-  var total_month = sla_calc_month_time(year,month);
-  var kpis=sla_calc_kpis(list,tag,total_month)
+
+  var kpis=sla_calc_kpis(list,tag,month)
 
   $('#numInc').val(kpis.num_inc);
   $('#totDTime').val(kpis.total_dtime);
@@ -142,4 +141,3 @@ var myChart = new Chart(ctx, {
     }
 });
 }
-

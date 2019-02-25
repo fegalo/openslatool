@@ -26,12 +26,13 @@ function sla_calc_month_time(year,month){
 /**
 Calculate the total minutes of the incidents
 */
-function sla_calc_kpis(list,tag,total_month){
+function sla_calc_kpis(list,tag,month){
   var total_dtime=0;
   var num_inc=0;
   var max_dtime=0;
+  var total_month = sla_calc_month_time(year,month);
   list.forEach(function(e) {
-    if($.inArray(tag,e.tags) != -1){
+    if(($.inArray(tag,e.tags) != -1)&&(moment(e).month()==month)){
       var duration_time=sla_extract_time(e);
       total_dtime+=duration_time;
       num_inc++;
