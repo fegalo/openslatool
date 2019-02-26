@@ -53,6 +53,29 @@ function sla_calc_kpis(list,tag,month){
   return ret;
 }
 /**
+Calculate tags and number of incidents
+*/
+function sla_calc_tags(list,month){
+  var total_dtime=0;
+  var num_inc=0;
+  var max_dtime=0;
+  var total_month = sla_calc_month_time(year,month);
+  var tags_list=new Map();
+  list.forEach(function(e) {
+    if(moment(e).month()==month){
+      e.tags.forEach(function(t) {
+        if(tags_list.has(t)){
+          tags_list.set(t,tags_list.get(t)+1);
+        }else{
+          tags_list.set(t,1);
+        }
+      });
+    }
+  });
+  sla_log_debug(tags_list);
+  return tags_list;
+}
+/**
 Calculate the duration of an incident
 */
 function sla_extract_time(inc){

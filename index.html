@@ -48,10 +48,17 @@
           <tbody>
           </tbody>
         </table>
-          <button id="loadIncidentListButton" class="btn btn-primary">Load Default List</button>
-            <div class="form-group">
-              <input type="file" class="form-control-file" id="inputIncidentListFile">
-            </div>
+        <button id="loadIncidentListButton" class="btn btn-primary">Load Default List</button>
+        <div class="form-group">
+        </div>
+        <div class="form-group">
+        <label class="btn btn-primary col-sm-4">
+          Load from JSON <input type="file" class="form-control-file" id="inputIncidentListFile" hidden>
+        </label>
+        <label class="btn btn-primary col-sm-4">
+          Load from CSV (TODO)
+        </label>
+      </div>
       </div>
     </div>
 
@@ -96,7 +103,12 @@
     <div class="collapse" id="chartsDiv">
       <div class="card card-body">
       <h2>Charts</h2>
-      <canvas id="myChart" width="400" height="400"></canvas>
+      <div id="canvasDiv">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+      <div id="canvasDiv2">
+        <canvas id="myChart2" width="400" height="400"></canvas>
+      </div>
       </div>
     </div>
   </body>
