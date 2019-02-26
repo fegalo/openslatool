@@ -117,6 +117,10 @@ function getValue(id){
 }
 //charts
 function create_chart(tags){
+//remove previous
+$('#myChart').remove();
+$('#canvasDiv').append('<canvas id="myChart" width="400" height="400"></canvas>');
+
 var ctx = document.getElementById("myChart").getContext('2d');
 var tag_entries =  Array.from(tags.entries());
 var tag_values =  Array.from(tags.values());
