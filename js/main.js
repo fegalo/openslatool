@@ -13,6 +13,7 @@ function main() {
   create_default_list();
   fill_table(incidents_list);
   create_sample_chart();//sample
+  create_sample_chart2();
 }
 
 /** Create a default list of incidents */
@@ -200,4 +201,41 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+}
+
+
+function create_sample_chart2(){
+  $('#myChart2').remove();
+  $('#canvasDiv2').append('<canvas id="myChart2" width="400" height="400"></canvas>');
+
+  var ctx = document.getElementById("myChart2").getContext('2d');
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+      data: {
+        labels: [1,2,3,4,5,6,7,8,9,10],
+        datasets: [{
+            data: [1,2,33,42,5,36,71,8,39,10],
+            label: "Back",
+            borderColor: "#3e95cd",
+            fill: false
+          }, {
+            data: [1,22,33,42,5,36,71,7,32,10],
+            label: "Middle",
+            borderColor: "#8e5ea2",
+            fill: false
+          }, {
+            data: [15,22,83,4,5,16,71,73,32,60],
+            label: "Front",
+            borderColor: "#3cba9f",
+            fill: false
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Time'
+        }
+      }
+    });
 }
