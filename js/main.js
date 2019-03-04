@@ -162,7 +162,43 @@ var myChart = new Chart(ctx, {
     }
 });
 }
-//charts
+function create_chart2(tags){
+  $('#myChart2').remove();
+  $('#canvasDiv2').append('<canvas id="myChart2" width="400" height="400"></canvas>');
+
+  var tag_keys =  Array.from(tags.keys());
+  var dataset=[];
+  tag_keys.forEach(function(key,i) {
+    dataset[i]={
+      "data" : Array.from(tags.get(key).values()),
+      "label": key,
+      "borderColor": "#3e95cd",
+      "fill": false
+    }
+    var data=Array.from(tags.get(key).values());
+    var label= key;
+  });
+  var tag_values =  Array.from(tags.values());
+
+
+
+
+  var ctx = document.getElementById("myChart2").getContext('2d');
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+      data: {
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+        datasets: dataset
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Time'
+        }
+      }
+    });
+}
+//sample charts
 function create_sample_chart(){
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
@@ -212,19 +248,19 @@ function create_sample_chart2(){
   var myLineChart = new Chart(ctx, {
     type: 'line',
       data: {
-        labels: [1,2,3,4,5,6,7,8,9,10],
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
         datasets: [{
-            data: [1,2,33,42,5,36,71,8,39,10],
+            data: [1,2,33,42,5,36,71,8,39,10,1,2,3,44,5,6,7,6,9,5,1,2,3,4,5,6,7,8,9,10],
             label: "Back",
             borderColor: "#3e95cd",
             fill: false
           }, {
-            data: [1,22,33,42,5,36,71,7,32,10],
+            data: [1,22,33,42,5,36,71,7,32,10,1,22,33,42,5,36,71,7,32,10,1,22,33,42,5,36,71,7,32,10],
             label: "Middle",
             borderColor: "#8e5ea2",
             fill: false
           }, {
-            data: [15,22,83,4,5,16,71,73,32,60],
+            data: [15,22,83,4,5,16,71,73,32,30,5,22,83,14,5,16,71,23,32,60,15,22,33,4,5,14,71,73,32,60],
             label: "Front",
             borderColor: "#3cba9f",
             fill: false
