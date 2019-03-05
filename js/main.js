@@ -168,20 +168,18 @@ function create_chart2(tags){
 
   var tag_keys =  Array.from(tags.keys());
   var dataset=[];
+  var colors=["#3e95cd","#8e5ea2","#3cba9f"];
   tag_keys.forEach(function(key,i) {
     dataset[i]={
       "data" : Array.from(tags.get(key).values()),
       "label": key,
-      "borderColor": "#3e95cd",
+      "borderColor": colors[i%colors.length],
       "fill": false
     }
     var data=Array.from(tags.get(key).values());
     var label= key;
   });
   var tag_values =  Array.from(tags.values());
-
-
-
 
   var ctx = document.getElementById("myChart2").getContext('2d');
   var myLineChart = new Chart(ctx, {
