@@ -26,7 +26,7 @@ function sla_calc_month_time(year,month){
 /**
 Calculate the total minutes of the incidents
 */
-function sla_calc_kpis(list,tag,month){
+function sla_calc_kpis(list,tag,month,year){
   var total_dtime=0;
   var num_inc=0;
   var max_dtime=0;
