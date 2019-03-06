@@ -75,7 +75,7 @@ function fill_ava(list){
   var month=getValue('#month');
   var tag=getValue('#tag');
 
-  var kpis=sla_calc_kpis(list,tag,month)
+  var kpis=sla_calc_kpis(list,tag,month,year)
 
   $('#numInc').val(kpis.num_inc);
   $('#totDTime').val(kpis.total_dtime);
