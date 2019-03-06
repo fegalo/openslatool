@@ -127,10 +127,12 @@ function handle_file_csv(evt) {
 function csv_parser(csv_list){
   var lines=csv_list.split('\n');
   var incidents_list=[];
+  var ignored_lines=1;//first line ignored
   for(var i=1;i < lines.length;i++){
       sla_log_debug(lines[i])
     var fields=lines[i].split(',');
     if(fields.length<5){
+      ignored_lines++;
       continue;
     }
     var inc={
@@ -140,7 +142,7 @@ function csv_parser(csv_list){
      "tags": fields[3].substr(1,fields[3].length-2).split(';'),
      "desc": fields[4].substr(1,fields[4].length-2),
     }
-    incidents_list[i-1]=inc;
+    incidents_list[i-ignored_lines]=inc;
 
   }
   return incidents_list;
@@ -215,8 +217,6 @@ function create_chart2(tags){
       "borderColor": colors[i%colors.length],
       "fill": false
     }
-    var data=Array.from(tags.get(key).values());
-    var label= key;
   });
   var tag_values =  Array.from(tags.values());
 

@@ -89,11 +89,11 @@ function sla_calc_tags_times(list,month){
       e.tags.forEach(function(t) {
         if(tags_list.has(t)){
           var tags_day=tags_list.get(t);
-          tags_day.set(moment(e.start).day(),tags_day.get(moment(e.start).day())+sla_extract_time(e));
+          tags_day.set(moment(e.start).date(),tags_day.get(moment(e.start).date())+sla_extract_time(e));
           //tags_list.set(t,tags_day);
         }else{
           var tags_day=createTagMonth();
-          tags_day.set(moment(e.start).day(),tags_day.get(moment(e.start).day())+sla_extract_time(e));
+          tags_day.set(moment(e.start).date(),tags_day.get(moment(e.start).date())+sla_extract_time(e));
           tags_list.set(t,tags_day);
         }
       });
