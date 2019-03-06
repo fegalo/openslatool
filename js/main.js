@@ -50,6 +50,9 @@ function load_events() {
   $('#inputIncidentListFile').on('change',function(e) {
    handle_file(e);
   });
+  $('#inputIncidentListFileCSV').on('change',function(e) {
+   handle_file_csv(e);
+  });
 }
 
 /** Fill the incidents table */
@@ -91,6 +94,8 @@ function fill_charts(list){
 
   var tags_map=sla_calc_tags(list,month);
   create_chart(tags_map);
+  var tags_times_map=sla_calc_tags_times(list,month);
+  create_chart2(tags_times_map);
 }
 /** Handle files */
 function handle_file(evt) {
@@ -105,6 +110,40 @@ function handle_file(evt) {
      })(f);
     reader.readAsText(f);
   }
+}
+function handle_file_csv(evt) {
+  var files = evt.target.files;
+  for (var i = 0, f; f = files[i]; i++) {
+    var reader = new FileReader();
+    reader.onload = (function(theFile) {
+      return function(e) {
+        incidents_list=csv_parser(e.target.result);
+        fill_table(incidents_list);
+       };
+     })(f);
+    reader.readAsText(f);
+  }
+}
+function csv_parser(csv_list){
+  var lines=csv_list.split('\n');
+  var incidents_list=[];
+  for(var i=1;i < lines.length;i++){
+      sla_log_debug(lines[i])
+    var fields=lines[i].split(',');
+    if(fields.length<5){
+      continue;
+    }
+    var inc={
+     "id": fields[0].substr(1,fields[0].length-2),
+     "start": fields[1].substr(1,fields[1].length-2),
+     "end": fields[2].substr(1,fields[2].length-2),
+     "tags": fields[3].substr(1,fields[3].length-2).split(';'),
+     "desc": fields[4].substr(1,fields[4].length-2),
+    }
+    incidents_list[i-1]=inc;
+
+  }
+  return incidents_list;
 }
 /** Get the value from a form field */
 function getValue(id){
