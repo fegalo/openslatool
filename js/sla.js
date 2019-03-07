@@ -26,13 +26,15 @@ function sla_calc_month_time(year,month){
 /**
 Calculate the total minutes of the incidents
 */
-function sla_calc_kpis(list,tag,month,year){
+function sla_calc_kpis(list,tag,subtag,month,year){
   var total_dtime=0;
   var num_inc=0;
   var max_dtime=0;
   var total_month = sla_calc_month_time(year,month);
   list.forEach(function(e) {
-    if(($.inArray(tag,e.tags) != -1)&&(moment(e.start).month()==month-1)){
+    if(($.inArray(tag,e.tags) != -1)
+        &&(moment(e.start).month()==month-1)
+        &&( ($.inArray(subtag,e.subtags) != -1) || ("*" === subtag ))) {
       var duration_time=sla_extract_time(e);
       total_dtime+=duration_time;
       num_inc++;
@@ -42,9 +44,10 @@ function sla_calc_kpis(list,tag,month,year){
     }
   });
   var ava= 1-total_dtime/total_month;
-  ava=Math.round(ava * 100 * 100) / 100;
+  ava=Math.round(ava * 100 * 1000) / 1000;
   var ret={
     "total_dtime": total_dtime,
+    "total_month": total_month,
     "num_inc": num_inc,
     "max_dtime": max_dtime,
     "availability": ava

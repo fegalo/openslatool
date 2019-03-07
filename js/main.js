@@ -23,6 +23,7 @@ function create_default_list(){
     start: '2019-01-15 01:00',
     end: '2019-01-15 02:00',
     tags: ["back", "middle", "front"],
+    subtags: ["low"],
     desc: 'Incident 1'
   };
   var inc2 = {
@@ -30,6 +31,7 @@ function create_default_list(){
     start: '2019-01-15 03:00',
     end: '2019-01-15 05:00',
     tags: ["back"],
+    subtags: ["high"],
     desc: 'Incident 2'
   };
   incidents_list=[inc1,inc2];
@@ -64,6 +66,7 @@ function fill_table(list){
         $('<td>').text(item.start),
         $('<td>').text(item.end),
         $('<td>').text(item.tags),
+        $('<td>').text(item.subtags).addClass("d-none d-sm-table-cell"),
         $('<td>').text(item.desc).addClass("d-none d-sm-table-cell")
     );
     $tr.appendTo('#incidentListTable tbody');
@@ -74,11 +77,13 @@ function fill_ava(list){
   var year=getValue('#year');
   var month=getValue('#month');
   var tag=getValue('#tag');
+  var subtag=getValue('#subtag');
 
-  var kpis=sla_calc_kpis(list,tag,month,year)
+  var kpis=sla_calc_kpis(list,tag,subtag,month,year)
 
   $('#numInc').val(kpis.num_inc);
   $('#totDTime').val(kpis.total_dtime);
+  $('#totTime').val(kpis.total_month);
   $('#maxDTime').val(kpis.max_dtime);
   $('#avail').val(kpis.availability + '%');
 }
@@ -125,22 +130,24 @@ function handle_file_csv(evt) {
   }
 }
 function csv_parser(csv_list){
+  csv_list=csv_list.replace('\r\n','\n');
   var lines=csv_list.split('\n');
   var incidents_list=[];
   var ignored_lines=1;//first line ignored
   for(var i=1;i < lines.length;i++){
       sla_log_debug(lines[i])
-    var fields=lines[i].split(',');
+    var fields=lines[i].split(';');
     if(fields.length<5){
       ignored_lines++;
       continue;
     }
     var inc={
-     "id": fields[0].substr(1,fields[0].length-2),
-     "start": fields[1].substr(1,fields[1].length-2),
-     "end": fields[2].substr(1,fields[2].length-2),
-     "tags": fields[3].substr(1,fields[3].length-2).split(';'),
-     "desc": fields[4].substr(1,fields[4].length-2),
+     "id": fields[0],
+     "start": fields[1],
+     "end": fields[2],
+     "tags": fields[3].split(','),
+     "subtags": fields[4].split(','),
+     "desc": fields[5]
     }
     incidents_list[i-ignored_lines]=inc;
 
