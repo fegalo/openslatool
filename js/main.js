@@ -82,10 +82,13 @@ function fill_ava(list){
   var kpis=sla_calc_kpis(list,tag,subtag,month,year)
 
   $('#numInc').val(kpis.num_inc);
+  $('#maxDTime').val(kpis.max_dtime);
   $('#totDTime').val(kpis.total_dtime);
   $('#totTime').val(kpis.total_month);
-  $('#maxDTime').val(kpis.max_dtime);
   $('#avail').val(kpis.availability + '%');
+  $('#totDTimesw').val(kpis.total_dtime_sw);
+  $('#totTimesw').val(kpis.total_month_sw);
+  $('#availsw').val(kpis.availabilitysw + '%');
 }
 /** Fill charts*/
 function fill_charts(list){

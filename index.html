@@ -96,7 +96,7 @@
           <div class="form-group row">
             <label for="totTime" class="col-form-label col-sm-2">Total downtime</label>
             <input type="text" class="form-control col-sm-2" id="totDTime" aria-describedby="totDTimeHelp" placeholder="0 minutes" readonly>
-            <small id="totDTimeHelp" class="form-text text-muted col-sm-2">The sum of all incidents</small>
+            <small id="totDTimeHelp" class="form-text text-muted col-sm-2">The total time of all incidents</small>
           </div>
           <div class="form-group row">
             <label for="totTime" class="col-form-label col-sm-2">Total time</label>
@@ -107,6 +107,21 @@
             <label for="avail" class="col-form-label col-sm-2">Availability</label>
             <input type="text" class="form-control col-sm-2" id="avail" aria-describedby="avaHelp" placeholder="%" readonly>
             <small id="avaHelp" class="form-text text-muted col-sm-2">(24x7)</small>
+          </div>
+          <div class="form-group row">
+            <label for="totTime" class="col-form-label col-sm-2">Total downtime SW</label>
+            <input type="text" class="form-control col-sm-2" id="totDTimesw" aria-describedby="totDTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totDTimeHelp" class="form-text text-muted col-sm-2">The total time of all incidents, from 0:00 to 1:00 and from 6:00 to 24:00</small>
+          </div>
+          <div class="form-group row">
+            <label for="totTime" class="col-form-label col-sm-2">Total time SW</label>
+            <input type="text" class="form-control col-sm-2" id="totTimesw" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totTimeHelp" class="form-text text-muted col-sm-2">Minutes of the month, from 0:00 to 1:00 and from 6:00 to 24:00</small>
+          </div>
+          <div class="form-group row">
+            <label for="avail" class="col-form-label col-sm-2">Availability</label>
+            <input type="text" class="form-control col-sm-2" id="availsw" aria-describedby="avaHelp" placeholder="%" readonly>
+            <small id="avaHelp" class="form-text text-muted col-sm-2">SW, from 0:00 to 1:00 and from 6:00 to 24:00</small>
           </div>
       </div>
     </div>
