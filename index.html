@@ -42,6 +42,7 @@
               <th scope="col">Start time</th>
               <th scope="col">End time</th>
               <th scope="col">Tags</th>
+              <th scope="col" class="d-none d-sm-table-cell">Subtags</th>
               <th scope="col" class="d-none d-sm-table-cell">Description</th>
             </tr>
           </thead>
@@ -74,8 +75,12 @@
             <input type="text" class="form-control col-sm-2" id="month" placeholder="1" >
           </div>
           <div class="form-group row">
-            <label for="year" class="col-form-label col-sm-2">Tag</label>
+            <label for="tag" class="col-form-label col-sm-2">Tag</label>
             <input type="text" class="form-control col-sm-2" id="tag" placeholder="back" >
+          </div>
+          <div class="form-group row">
+            <label for="subtag" class="col-form-label col-sm-2">Subtag</label>
+            <input type="text" class="form-control col-sm-2" id="subtag" placeholder="*" >
           </div>
           <button id="calcButton" class="btn btn-primary">Calculate</button>
           <hr class="col-xs-12">
@@ -84,14 +89,19 @@
             <input type="text" class="form-control col-sm-2" id="numInc" placeholder="0 incidents" readonly>
           </div>
           <div class="form-group row">
-            <label for="totTime" class="col-form-label col-sm-2">Total downtime</label>
-            <input type="text" class="form-control col-sm-2" id="totDTime" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
-            <small id="totTimeHelp" class="form-text text-muted col-sm-2">The sum of all incidents</small>
-          </div>
-          <div class="form-group row">
             <label for="maxTime" class="col-form-label col-sm-2">Maximum downtime</label>
             <input type="text" class="form-control col-sm-2" id="maxDTime" aria-describedby="maxTimeHelp" placeholder="0 minutes" readonly>
             <small id="maxTimeHelp" class="form-text text-muted col-sm-2">Maximum time</small>
+          </div>
+          <div class="form-group row">
+            <label for="totTime" class="col-form-label col-sm-2">Total downtime</label>
+            <input type="text" class="form-control col-sm-2" id="totDTime" aria-describedby="totDTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totDTimeHelp" class="form-text text-muted col-sm-2">The sum of all incidents</small>
+          </div>
+          <div class="form-group row">
+            <label for="totTime" class="col-form-label col-sm-2">Total time</label>
+            <input type="text" class="form-control col-sm-2" id="totTime" aria-describedby="totTimeHelp" placeholder="0 minutes" readonly>
+            <small id="totTimeHelp" class="form-text text-muted col-sm-2">Minutes of the month</small>
           </div>
           <div class="form-group row">
             <label for="avail" class="col-form-label col-sm-2">Availability</label>
@@ -100,15 +110,17 @@
           </div>
       </div>
     </div>
-    <div class="collapse" id="chartsDiv">
+    <div class="collapse show" id="chartsDiv">
       <div class="card card-body">
       <h2>Charts</h2>
-      <div id="canvasDiv">
-        <canvas id="myChart" width="400" height="400"></canvas>
-      </div>
-      <div id="canvasDiv2">
-        <canvas id="myChart2" width="400" height="400"></canvas>
-      </div>
+      <div class="form-group row">
+        <div id="canvasDiv" class="col-12 col-md-6">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div id="canvasDiv2" class="col-12 col-md-6">
+          <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+      <div>
       </div>
     </div>
   </body>
